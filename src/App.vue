@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <vheader>头部组件</vheader>
-    <div>
+    <div class="middle">
       <div>商品</div>
       <div>评论</div>
       <div>商家</div>
