@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <vheader>头部组件</vheader>
-    <div>中间组件</div>
+    <div>
+      <div>商品</div>
+      <div>评论</div>
+      <div>商家</div>
+    </div>
     <div>尾部组件</div>
   </div>
 </template>
