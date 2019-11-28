@@ -1,23 +1,21 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <vheader>头部组件</vheader>
+    <div>中间组件</div>
+    <div>尾部组件</div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import headerContain from './components/header/headerContain.vue';
+
+  export default {
+    components: {
+      vheader: headerContain
+    }
+  };
+
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
 </style>
