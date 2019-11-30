@@ -1,6 +1,6 @@
 <template>
   <div class="contain">
-    <vheader>头部组件</vheader>
+    <vheader :sellerList="sellerList">头部组件</vheader>
     <div class="middle">
       <router-link to="/goods">商品</router-link>
       <router-link to="/comments">评论</router-link>
@@ -17,6 +17,23 @@
   import footerContain from './components/footer/footerContain';
 
   export default {
+    data () {
+      return {
+        sellerList: []
+      };
+    },
+    created () {
+      this.getSeller();
+    },
+    methods: {
+      getSeller () {
+        this.axios.get('api/seller').then((res) => {
+          if (res.status === 200) {
+            this.sellerList = res.data.value;
+          }
+        });
+      }
+    },
     components: {
       vheader: headerContain,
       vfooter: footerContain
