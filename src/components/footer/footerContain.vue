@@ -1,6 +1,5 @@
 <template>
     <div class="footerContain">
-      <h1>我是尾部组件</h1>
     </div>
 </template>
 

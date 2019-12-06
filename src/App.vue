@@ -6,8 +6,7 @@
       <router-link to="/comments">评论</router-link>
       <router-link to="/store">商家</router-link>
     </div>
-    <hr>
-    <router-view></router-view>
+    <router-view :goodsList="goodsList"></router-view>
     <vfooter></vfooter>
   </div>
 </template>
@@ -19,17 +18,26 @@
   export default {
     data () {
       return {
-        sellerList: []
+        sellerList: [],
+        goodsList: []
       };
     },
     created () {
       this.getSeller();
+      this.getGoods();
     },
     methods: {
       getSeller () {
-        this.axios.get('api/seller').then((res) => {
+        this.axios.get('api/seller').then(res => {
           if (res.status === 200) {
             this.sellerList = res.data.value;
+          }
+        });
+      },
+      getGoods () {
+        this.axios.get('api/goods').then(res => {
+          if (res.status === 200) {
+            this.goodsList = res.data.value;
           }
         });
       }
@@ -57,9 +65,6 @@
       }
       .router-link-exact-active,router-link-active{
         color: rgb(240,20,20);
-      }
-      hr{
-        color: rgb(7,17,27);
       }
     }
   }

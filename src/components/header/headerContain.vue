@@ -7,7 +7,7 @@
       <div class="content">
         <div class="store">
           <span class="storeLogo">
-            <img src="./brand@2x.png"/>
+            <img src="./images/brand@2x.png"/>
           </span>
           <span class="storeName">{{sellerList.name}}</span>
         </div>
@@ -15,30 +15,82 @@
         </div>
         <div class="decrease">
           <span class="decimg">
-            <img src="./decrease_2@2x.png"/>
+            <img src="./images/decrease_2@2x.png"/>
           </span>
-          <span class="desc">{{sellerList.supports[0].description}}</span>
+          <span class="desc" v-if="sellerList.supports">{{sellerList.supports[0].description}}</span>
         </div>
       </div>
       <div class="number" @click="getDetailShow">5个<span> > </span></div>
     </div>
     <div class="announcement" @click="getDetailShow">
       <span class="bullimg">
-        <img src="./bulletin@2x.png"/>
+        <img src="images/bulletin@2x.png"/>
       </span><span class="bulletin">{{sellerList.bulletin}}</span>
     </div>
     <div class="background">
       <img :src="sellerList.avatar" width="100%" height="100%"/>
     </div>
     <div class="detail" v-show="detailShow">
-      <div class="detailName">{{sellerList.name}}</div>
-      <div>stttd</div>
-      <div></div>
-    </div>
+        <div class="detail-wrapper clearfix">
+          <div class="detail-main">
+            <h1 class="detailMain-name">{{sellerList.name}}</h1>
+            <div class="detainMain-starts">
+              <start :size="48" :score="sellerList.score"></start>
+            </div>
+            <div class="detainMain-text">
+              <div class="detainMain-line"></div>
+              <div class="detainMain-title">优惠信息</div>
+              <div class="detainMain-line"></div>
+            </div>
+            <div class="detainMain-free">
+              <div class="jian">
+              <span>
+                <img src="./images/decrease_2@2x.png"/>
+              </span>
+                <span v-if="sellerList.supports">{{sellerList.supports[0].description}}</span>
+              </div>
+              <div class="one">
+              <span>
+                <img src="./images/discount_2@3x.png"/>
+              </span>
+                <span v-if="sellerList.supports">{{sellerList.supports[2].description}}</span>
+              </div>
+              <div class="zhe">
+              <span>
+                <img src="./images/discount_2@2x.png"/>
+              </span>
+                <span>清肺雪梨汤8折抢购</span>
+              </div>
+              <div class="te">
+              <span>
+                <img src="./images/special_2@3x.png"/>
+              </span>
+                <span>特价饮品八折抢购</span>
+              </div>
+              <div class="onete">
+              <span>
+                <img src="./images/special_2@2x.png"/>
+              </span>
+                <span>单人特色套餐</span>
+              </div>
+            </div>
+            <div class="detainMain-storeAnnounce">
+              <div class="line"></div>
+              <div class="announce">商家公告</div>
+              <div class="line"></div>
+            </div>
+            <div class="detainMain-announce">{{sellerList.bulletin}}</div>
+          </div>
+        </div>
+        <div class="detail-close">
+          <span class="clothremove" @click="delDetailShow">X</span>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
+  import start from '../start/start';
   export default {
     name: 'headerContain',
     // 将父组件中的sellerList传给子组件使用
@@ -51,7 +103,13 @@
     methods: {
       getDetailShow () {
         this.detailShow = true;
+      },
+      delDetailShow () {
+        this.detailShow = false;
       }
+    },
+    components: {
+      start
     }
   };
 </script>
@@ -162,10 +220,112 @@
       position: fixed;
       top: 0;
       left: 0;
-      background-color: rgba(7,17,27,0.8);
-      filter: blur(10px);
       z-index: 100;
+      background-color: rgba(7,17,27,0.8);
       overflow: auto;
-    }
+      /*&.fade-enter-to{*/
+        /*opacity: 1;*/
+        /*background-color: rgba(7,17,27,0.8);*/
+      /*}*/
+      /*&.fade-enter,&.fade-leave{*/
+        /*opacity: 0;*/
+        /*background-color: rgba(7,17,27,0);*/
+      }
+      &.clearfix{
+        display: inline-block;
+        .clearfix:after{
+          display: block;
+          content: ".";
+          height: 0;
+          line-height: 0;
+          clear: both;
+          visibility: hidden;
+        }
+      }
+      .detail-wrapper{
+        min-height: 100%;
+        width: 100%;
+        .detail-main{
+          margin-top: 64px;
+          padding-bottom: 64px;
+          color: rgb(255,255,255);
+          .detailMain-name{
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 16px;
+            text-align: center;
+          }
+          .detainMain-starts{
+            height: 24px;
+            margin: 16px auto 14px auto;
+            text-align: center;
+          }
+          .detainMain-text{
+            display: flex;
+            width: 80%;
+            margin: 28px auto 24px auto;
+            .detainMain-line{
+              flex: 1;
+              position: relative;
+              top: -6px;
+              border-bottom: 1px solid rgba(255,255,255,0.2);
+            }
+            .detainMain-title{
+              padding: 0 12px;
+              font-size: 14px;
+            }
+          }
+          .detainMain-free{
+            margin-left: 10%;
+            div{
+              margin-bottom: 12px;
+              &:last-child{
+                margin-bottom: 0;
+              }
+              span{
+                font-size: 12px;
+                line-height: 12px;
+                vertical-align: top;
+                img{
+                  margin-left: 12px;
+                  vertical-align: top;
+                  height: 16px;
+                }
+              }
+            }
+          }
+          .detainMain-storeAnnounce{
+            width: 80%;
+            margin: 28px auto 24px auto;
+            display: flex;
+            .line{
+              flex: 1;
+              position: relative;
+              top: -6px;
+              border-bottom: 1px solid rgba(255,255,255,0.2);
+            }
+            .announce{
+              font-size: 14px;
+              line-height: 14px;
+              font-weight: 700;
+              padding: 0 12px;
+            }
+          }
+          .detainMain-announce{
+            margin: 0 10%;
+            padding: 0 12px;
+            font-size: 12px;
+            line-height: 20px;
+          }
+        }
+      }
+      .detail-close{
+        position: relative;
+        width: 32px;
+        height: 32px;
+        margin: -64px auto 0 auto;
+        clear: both;
+        font-size: 32px;
+      }
   }
 </style>
